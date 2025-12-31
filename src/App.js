@@ -16,7 +16,7 @@ const App = () => {
         </div>
 
         <div className="todo-filters">
-          <button className="filter-btn active">All</button>
+          <button className="filter-btn filter-active">All</button>
           <button className="filter-btn">Active</button>
           <button className="filter-btn">Completed</button>
         </div>
