@@ -14,6 +14,14 @@ const App = () => {
           />
           <button className="todo-button">Add</button>
         </div>
+
+        <div className="todo-filters">
+          <button className="filter-btn active">All</button>
+          <button className="filter-btn">Active</button>
+          <button className="filter-btn">Completed</button>
+        </div>
+
+        <p className="todo-empty">No tasks yet. Add one above!</p>
       </div>
     </div>
   );
