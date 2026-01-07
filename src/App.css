@@ -89,3 +89,27 @@
   font-size: 14px;
   color: #6b7280;
 }
+
+.filter-btn {
+  background: #e5e7eb;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.filter-btn.active {
+  background: #3b82f6;
+  color: white;
+}
+
+.todo-footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.todo-footer span {
+  color: #2563eb;
+}
