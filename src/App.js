@@ -1,106 +1,50 @@
 import { useState } from "react";
 import "./App.css";
 
+// React Components --> Functional Component vs Class Component
+// Hook --> helps the functional component behave same as class component
+// UseState hook --> Allow us to store data within functional component
+
 const App = () => {
-  const [tasks, setTasks] = useState([]);
-  const [input, setInput] = useState("");
-  const [filter, setFilter] = useState("All");
+  const [tasks, setTasks] = useState(["Task1", "Task2"]);
+  const [taskValue, setTaskValue] = useState("");
+
+  const clearTasks = () => setTasks([]);
 
   const addTask = () => {
-    if (input === "") {
+    if (taskValue === "") {
       alert("Please enter a task!");
-      return;
     }
 
-    setTasks([...tasks, { text: input, completed: false }]);
-    setInput("");
+    setTasks((prev) => [...prev, taskValue]);
+    setTaskValue("");
   };
 
-  const toggleTask = (index) => {
-    const newTasks = [...tasks];
-    newTasks[index].completed = !newTasks[index].completed;
-    setTasks(newTasks);
-  };
-
-  const deleteTask = (index) => {
-    const confirmed = window.confirm(
-      "Are you sure you want to delete this task?"
-    );
-
-    if (confirmed) {
-      setTasks(tasks.filter((_, i) => i !== index));
-    }
-  };
-
-  const clearCompleted = () => {
-    setTasks(tasks.filter((task) => !task.completed));
-  };
-
-  const filteredTasks = tasks.filter((task) => {
-    if (filter === "Active") return !task.completed;
-    if (filter === "Completed") return task.completed;
-    return true;
-  });
-
-  const completedCount = tasks.filter((t) => t.completed).length;
+  console.log(tasks);
 
   return (
-    <div className="App">
-      <div className="todo-box">
-        <h1 className="todo-title">To-Do List</h1>
+    <div id="app-container">
+      <div id="card">
+        <h1>To-do list</h1>
 
-        <div className="todo-input-row">
+        <div id="task-manager">
           <input
-            className="todo-input"
+            type="text"
+            maxLength={100}
             placeholder="Add a new task..."
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
+            value={taskValue}
+            onChange={(e) => setTaskValue(e.target.value)}
           />
-          <button className="todo-button" onClick={addTask}>
-            Add
-          </button>
+
+          <button onClick={addTask}>Add</button>
+          <button onClick={clearTasks}>Clear</button>
         </div>
 
-        <div className="todo-filters">
-          {["All", "Active", "Completed"].map((f) => (
-            <button
-              key={f}
-              className={filter === f ? "filter-btn active" : "filter-btn"}
-              onClick={() => setFilter(f)}
-            >
-              {f}
-            </button>
-          ))}
-        </div>
-
-        {filteredTasks.map((task, index) => (
-          <div className="todo-item" key={index}>
-            <input
-              type="checkbox"
-              checked={task.completed}
-              onChange={() => toggleTask(index)}
-            />
-            <span className={task.completed ? "done" : ""}>{task.text}</span>
-            <button className="delete-btn" onClick={() => deleteTask(index)}>
-              Delete
-            </button>
-          </div>
-        ))}
-
-        {tasks.length > 0 && (
-          <div className="todo-footer-row">
-            <span>
-              {completedCount} of {tasks.length} tasks completed
-            </span>
-            <button className="clear-btn" onClick={clearCompleted}>
-              Clear Completed
-            </button>
-          </div>
-        )}
-
-        <p className="todo-footer">
-          Powered by <span>Pinecone Academy</span>
-        </p>
+        <ul id="tasks">
+          {tasks.map((task) => {
+            return <li>{task}</li>;
+          })}
+        </ul>
       </div>
     </div>
   );
