@@ -127,6 +127,8 @@ const App = () => {
     (task) => task.status === "completed"
   ).length;
 
+  const activeCount = tasks.filter((task) => task.status === "active").length;
+
   const totalCount = tasks.length;
 
   return (
@@ -219,7 +221,13 @@ const App = () => {
             }}
           >
             <p>
-              {completedCount} out of {totalCount} tasks completed
+              {filterValue === "all" &&
+                `${completedCount} out of ${totalCount} tasks completed`}
+
+              {filterValue === "active" && `Active: ${activeCount} task(s)`}
+
+              {filterValue === "completed" &&
+                `Completed: ${completedCount} task(s)`}
             </p>
 
             {completedCount > 0 && (
